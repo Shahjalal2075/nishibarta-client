@@ -1,10 +1,13 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
+import TopNews from '../SharedSection/TopNews/TopNews';
+import CategoryHome from '../SharedSection/CategoryHome/CategoryHome';
+import RightSlider from '../SharedSection/RightSlider/RightSlider';
 
 const Home = () => {
 
-    const { user} = useContext(AuthContext);
-    const [loading,setLoading]=useState(false);
+    const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     if (loading) {
         return (
@@ -15,8 +18,18 @@ const Home = () => {
     }
 
     return (
-        <div className="">
-            <h2 className=' text-center'>Home</h2>
+        <div className="" >
+            <div>
+                <TopNews></TopNews>
+            </div>
+            <div className="grid grid-cols-3 mt-8">
+                <div className="col-span-2">
+                    <CategoryHome></CategoryHome>
+                </div>
+                <div className="">
+                    <RightSlider></RightSlider>
+                </div>
+            </div>
         </div>
     );
 };
