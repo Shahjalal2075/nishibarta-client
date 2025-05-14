@@ -22,10 +22,12 @@ const Home = () => {
             <div>
                 <TopNews></TopNews>
             </div>
+
             <div className="grid grid-cols-3 mt-8">
                 <div className="col-span-2">
                     <CategoryHome></CategoryHome>
                 </div>
+                
                 <div className="">
                     <RightSlider></RightSlider>
                 </div>
