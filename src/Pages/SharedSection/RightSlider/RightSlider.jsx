@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LatestNewsCard from "../../LatestNewsCard/LatestNewsCard";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const RightSlider = () => {
+
+    const { api } = useContext(AuthContext);
     const [latestNews, setLatestNews] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/news`)
+        fetch(`${api}/news`)
             .then(res => res.json())
             .then(data => {
                 const top8Data = data.slice(0, 8);

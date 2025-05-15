@@ -4,11 +4,13 @@ import { FaSearch, FaFacebookF, FaTwitter, FaYoutube, FaGoogle } from "react-ico
 import { FaLocationDot } from "react-icons/fa6";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { MdOutlineDateRange } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LatestNewsHeading from "../LatestNewsHeading/LatestNewsHeading";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Header = () => {
 
+    const { api,internalData } = useContext(AuthContext);
     const currentDate = new Date();
 
     const weekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -21,14 +23,14 @@ const Header = () => {
 
     const [menu, setMenu] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/menu`)
+        fetch(`${api}/menu`)
             .then(res => res.json())
             .then(data => {
                 const filteredData = data.filter(item => item.name.trim() !== "");
                 const sortedData = filteredData.sort((a, b) => a.sl - b.sl);
                 setMenu(sortedData);
             });
-    }, [])
+    }, [api])
 
     return (
         <div className="">
@@ -43,7 +45,7 @@ const Header = () => {
                             </div>
                             <div className="flex gap-1 items-center">
                                 <p><TiWeatherPartlySunny /></p>
-                                <p>31°</p>
+                                <p>{internalData.temperature}°</p>
                             </div>
                             <div className="flex gap-1 items-center">
                                 <p><MdOutlineDateRange /></p>
@@ -52,10 +54,10 @@ const Header = () => {
 
                         </div>
                         <div className="flex gap-4 items-center text-sm text-[#fff]">
-                            <a href="https://facebook.com"><FaFacebookF /></a>
-                            <a href="https://facebook.com"><FaTwitter /></a>
-                            <a href="https://facebook.com"><FaYoutube /></a>
-                            <a href="https://facebook.com"><FaGoogle /></a>
+                            <a href={internalData.facebook}><FaFacebookF /></a>
+                            <a href={internalData.twitter}><FaTwitter /></a>
+                            <a href={internalData.youtube}><FaYoutube /></a>
+                            <a href={internalData.google}><FaGoogle /></a>
                         </div>
                     </div>
                 </div>
@@ -65,10 +67,10 @@ const Header = () => {
             <div className="container mx-auto">
                 <div className="flex justify-between items-center py-4">
                     <div className="">
-                        <img src="https://i.ibb.co/jzHTFgY/logodark.png" alt="Nishi Barta" />
+                        <img src={internalData.logoDark} alt="Nishi Barta" />
                     </div>
                     <div className="">
-                        <img src="https://i.ibb.co/LY8TWzz/ad-728x90.jpg" alt="Ads" />
+                        <img src={internalData.headerAds} alt="Ads" />
                     </div>
                 </div>
             </div>

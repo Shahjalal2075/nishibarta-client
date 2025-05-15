@@ -1,20 +1,22 @@
 import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import PropTypes from 'prop-types';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NewsCardHome from "../NewsCardHome/NewsCardHome";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const CategoryCard = ({ section }) => {
 
+    const { api } = useContext(AuthContext);
     const [news, setNews] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/news/${section.link}`)
+        fetch(`${api}/news/${section.link}`)
             .then(res => res.json())
             .then(data => {
                 const top3Data = data.slice(0, 2);
                 setNews(top3Data);
             });
-    }, [section.link])
+    }, [api, section.link])
 
     return (
         <div className={(section.name === "") && "col-span-2"}>
@@ -30,11 +32,11 @@ const CategoryCard = ({ section }) => {
                         <div className="grid grid-cols-1 gap-4 my-3">
 
                             {
-                                news.map(item=>
-                                <NewsCardHome
-                                key={item._id}
-                                item={item}
-                                ></NewsCardHome>
+                                news.map(item =>
+                                    <NewsCardHome
+                                        key={item._id}
+                                        item={item}
+                                    ></NewsCardHome>
                                 )
                             }
                             <hr className="border border-[#D40000] w-full my-3" />

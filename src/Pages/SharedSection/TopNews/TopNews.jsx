@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TopNewsCard from "../TopNewsCard/TopNewsCard";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const TopNews = () => {
 
+    const { api } = useContext(AuthContext);
     const [topHeadNews, setTopHeadNews] = useState([]);
     const [topNews, setTopNews] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/news`)
+        fetch(`${api}/news`)
             .then(res => res.json())
             .then(data => {
                 const topHeadData = data.filter(item => item.isTopHead === true);

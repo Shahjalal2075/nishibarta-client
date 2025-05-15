@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CategoryCard from "../CategoryCard/CategoryCard";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const CategoryHome = () => {
 
+    const { api } = useContext(AuthContext);
     const [sectionList, setSectionList] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/menu`)
+        fetch(`${api}/menu`)
             .then(res => res.json())
             .then(data => {
                 const sortedData = data.sort((a, b) => a.sl - b.sl);
