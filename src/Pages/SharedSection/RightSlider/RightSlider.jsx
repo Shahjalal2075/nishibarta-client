@@ -6,15 +6,52 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const RightSlider = () => {
 
     const { api } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
     const [latestNews, setLatestNews] = useState([]);
+    const [ojanaNews, setOjanaNews] = useState([]);
+    const [chakriNews, setChakriNews] = useState([]);
+    
     useEffect(() => {
-        fetch(`${api}/news`)
-            .then(res => res.json())
-            .then(data => {
-                const top8Data = data.slice(0, 8);
-                setLatestNews(top8Data);
-            });
-    }, [])
+        const fetchData = async () => {
+            try {
+                const [newsRes, ojanaRes, chakriRes] = await Promise.all([
+                    fetch(`${api}/news`),
+                    fetch(`${api}/news/ojana`),
+                    fetch(`${api}/news/job`)
+                ]);
+
+                const [news, ojana, chakri] = await Promise.all([
+                    newsRes.json(),
+                    ojanaRes.json(),
+                    chakriRes.json()
+                ]);
+
+                const filterAndSort = (items, limit) =>
+                    items
+                        .filter(item => item.status === "Accept" && item.deleteStatus === "None")
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                        .slice(0, limit);
+
+                setLatestNews(filterAndSort(news, 8));
+                setOjanaNews(filterAndSort(ojana, 6));
+                setChakriNews(filterAndSort(chakri, 6));
+            } catch (error) {
+                console.error("Error fetching news:", error);
+            } finally {
+                setLoading(false); // ✅ Ensure loading is turned off
+            }
+        };
+
+        fetchData();
+    }, [api]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-[300px]">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#4101d8]"></div>
+            </div>
+        );
+    }
     return (
         <div className="ml-6">
             {/* Ads */}
@@ -87,158 +124,12 @@ const RightSlider = () => {
                     <h2 className="text-center">চাকরির সর্বশেষ খবর</h2>
                 </div>
                 <div className="mt-3">
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        chakriNews.map(news => <LatestNewsCard
+                            key={news._id}
+                            news={news}
+                        ></LatestNewsCard>)
+                    }
                 </div>
             </div>
 
@@ -259,82 +150,12 @@ const RightSlider = () => {
                     <h2 className="text-center">অজানা কিছু কথা</h2>
                 </div>
                 <div className="mt-3">
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="">
-                        <hr className="border border-[#969595] w-full" />
-                        <div className="py-3 flex justify-between gap-2">
-                            <div className="">
-                                <Link to={''}>
-                                    <img className="w-40" src="https://i.ibb.co/23Nnt3y/shakib.png" alt="" />
-                                </Link>
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
-                                    <h2>Nishi Barta</h2>
-                                    <p>১৫ ই জুন, ২০২২</p>
-                                </div>
-                                <div className="text-[#111] font-bold p-2 text-[13px]">
-                                    <Link>এক মাস পর হিলি স্থলবন্দর দিয়ে আবারও আলু আমদানি শুরু</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        ojanaNews.map(news => <LatestNewsCard
+                            key={news._id}
+                            news={news}
+                        ></LatestNewsCard>)
+                    }
                 </div>
             </div>
 

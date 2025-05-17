@@ -11,8 +11,16 @@ const TopNews = () => {
         fetch(`${api}/news`)
             .then(res => res.json())
             .then(data => {
-                const topHeadData = data.filter(item => item.isTopHead === true);
-                const topNewsData = data.filter(item => item.isTopNews === true);
+                const filtered = data.filter(item =>
+                    item.status === "Accept" && item.deleteStatus === "None"
+                );
+
+                const sorted = filtered.sort((a, b) =>
+                    new Date(b.date) - new Date(a.date)
+                );
+
+                const topHeadData = sorted.filter(item => item.isTopHead === true);
+                const topNewsData = sorted.filter(item => item.isTopNews === true);
                 const top1Data = topHeadData.slice(0, 1);
                 const top4Data = topNewsData.slice(0, 4);
                 setTopHeadNews(top1Data);

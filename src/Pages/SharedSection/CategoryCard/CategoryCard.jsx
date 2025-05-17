@@ -13,7 +13,14 @@ const CategoryCard = ({ section }) => {
         fetch(`${api}/news/${section.link}`)
             .then(res => res.json())
             .then(data => {
-                const top3Data = data.slice(0, 2);
+                const filtered = data.filter(item =>
+                    item.status === "Accept" && item.deleteStatus === "None"
+                );
+
+                const sorted = filtered.sort((a, b) =>
+                    new Date(b.date) - new Date(a.date)
+                );
+                const top3Data = sorted.slice(0, 2);
                 setNews(top3Data);
             });
     }, [api, section.link])
