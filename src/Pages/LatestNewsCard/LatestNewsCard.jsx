@@ -6,7 +6,7 @@ const LatestNewsCard = ({ news }) => {
             <hr className="border border-[#969595] w-full" />
             <div className="py-3 grid grid-cols-3 gap-3">
                 <div className="">
-                    <Link to={''}>
+                    <Link to={`/details/${news._id}`}>
                         <div className="w-full h-[86px]">
                             <img className="w-full h-full object-cover" src={news.cover} alt="" />
                         </div>
@@ -18,7 +18,7 @@ const LatestNewsCard = ({ news }) => {
                         <p>১৫ ই জুন, ২০২২</p>
                     </div>
                     <div className="text-[#111] font-bold p-2 text-[13px]">
-                        <Link>{news.headline}</Link>
+                        <Link to={`/details/${news._id}`} className="hover:text-[#da0000]">{news.headline}</Link>
                     </div>
                 </div>
             </div>

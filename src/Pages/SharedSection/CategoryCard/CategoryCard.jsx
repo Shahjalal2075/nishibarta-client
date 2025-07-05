@@ -10,7 +10,7 @@ const CategoryCard = ({ section }) => {
     const { api } = useContext(AuthContext);
     const [news, setNews] = useState([]);
     useEffect(() => {
-        fetch(`${api}/news/${section.link}`)
+        fetch(`https://nishibarta-server.vercel.app/news/${section.link}`)
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(item =>
@@ -23,7 +23,7 @@ const CategoryCard = ({ section }) => {
                 const top3Data = sorted.slice(0, 2);
                 setNews(top3Data);
             });
-    }, [api, section.link])
+    }, [section.link])
 
     return (
         <div className={(section.name === "") && "col-span-2"}>
@@ -33,7 +33,7 @@ const CategoryCard = ({ section }) => {
                     <div className="">
                         <hr className="border border-[#D40000] w-full my-3" />
                         <div className="flex justify-between items-center text-[#D40000] text-lg font-bold ">
-                            <h2>{section.name}</h2>
+                            <Link to={section.link}>{section.name}</Link>
                             <Link to={section.link}><FaLongArrowAltRight /></Link>
                         </div>
                         <div className="grid grid-cols-1 gap-4 my-3">
@@ -51,7 +51,7 @@ const CategoryCard = ({ section }) => {
                     </div>
                     :
                     <div className="w-full">
-                        <img className="w-full object-cover" src="https://i.ibb.co/vcztdnh/ad-970x90-2x.jpg" alt="Ads" />
+                        {/* <img className="w-full object-cover" src="https://i.ibb.co/vcztdnh/ad-970x90-2x.jpg" alt="Ads" /> */}
                     </div>
             }
         </div>

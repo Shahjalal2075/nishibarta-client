@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { FaSearch, FaFacebookF, FaTwitter, FaYoutube, FaGoogle } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -23,14 +23,14 @@ const Header = () => {
 
     const [menu, setMenu] = useState([]);
     useEffect(() => {
-        fetch(`${api}/menu`)
+        fetch(`https://nishibarta-server.vercel.app/menu`)
             .then(res => res.json())
             .then(data => {
                 const filteredData = data.filter(item => item.name.trim() !== "");
                 const sortedData = filteredData.sort((a, b) => a.sl - b.sl);
                 setMenu(sortedData);
             });
-    }, [api])
+    }, [])
 
     return (
         <div className="">
@@ -54,10 +54,9 @@ const Header = () => {
 
                         </div>
                         <div className="flex gap-4 items-center text-sm text-[#fff]">
-                            <a href={internalData.facebook}><FaFacebookF /></a>
-                            <a href={internalData.twitter}><FaTwitter /></a>
-                            <a href={internalData.youtube}><FaYoutube /></a>
-                            <a href={internalData.google}><FaGoogle /></a>
+                            <a href="https://www.facebook.com/nishibarta"><FaFacebookF /></a>
+                            <a href="https://www.youtube.com/@NishiBarta"><FaYoutube /></a>
+                            <a href="https://g.co/kgs/jUqu3YS"><FaGoogle /></a>
                         </div>
                     </div>
                 </div>
@@ -66,12 +65,12 @@ const Header = () => {
             {/* Logobar */}
             <div className="container mx-auto">
                 <div className="flex justify-between items-center py-4">
-                    <div className="">
+                    <Link to={"/"} className="">
                         <img src={internalData.logoDark} alt="Nishi Barta" />
-                    </div>
-                    <div className="">
+                    </Link>
+                    {/* <div className="">
                         <img src={internalData.headerAds} alt="Ads" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

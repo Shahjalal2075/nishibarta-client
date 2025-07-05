@@ -5,7 +5,7 @@ const TopNewsCard = ({ news }) => {
     return (
         <div className={news.isTopHead === true ? "col-span-2 row-span-2" : ""}>
             <div className="relative overflow-hidden rounded-lg shadow-md group w-full aspect-[1250/830]">
-                <Link to={''}>
+                <Link to={`/details/${news._id}`}>
                     <img
                         src={news.cover}
                         alt="cover"
@@ -14,7 +14,7 @@ const TopNewsCard = ({ news }) => {
                 </Link>
 
                 <Link
-                    to={''}
+                    to={`/${news.category}`}
                     className="bg-[#1D1D1D] text-white px-3 py-1 text-xs font-medium absolute top-2 left-2 rounded"
                 >
                     {news.categoryBn}
@@ -25,8 +25,8 @@ const TopNewsCard = ({ news }) => {
                         <h2>{news.journalist}</h2>
                         <p>১৫ ই জুন, ২০২২</p>
                     </div>
-                    <div className="text-white font-bold p-2 text-sm leading-tight">
-                        <Link to={''}>{news.headline}</Link>
+                    <div className="text-white font-bold p-2 text-sm leading-tight hover:text-[#ff6464]">
+                        <Link to={`/${news.category}`}>{news.headline}</Link>
                     </div>
                 </div>
             </div>

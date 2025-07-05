@@ -15,9 +15,9 @@ const RightSlider = () => {
         const fetchData = async () => {
             try {
                 const [newsRes, ojanaRes, chakriRes] = await Promise.all([
-                    fetch(`${api}/news`),
-                    fetch(`${api}/news/ojana`),
-                    fetch(`${api}/news/job`)
+                    fetch(`https://nishibarta-server.vercel.app/news`),
+                    fetch(`https://nishibarta-server.vercel.app/news/ojana`),
+                    fetch(`https://nishibarta-server.vercel.app/news/job`)
                 ]);
 
                 const [news, ojana, chakri] = await Promise.all([
@@ -43,7 +43,7 @@ const RightSlider = () => {
         };
 
         fetchData();
-    }, [api]);
+    }, []);
 
     if (loading) {
         return (
@@ -55,7 +55,7 @@ const RightSlider = () => {
     return (
         <div className="ml-6">
             {/* Ads */}
-            <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
+            {/* <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
                 <div className="w-full h-[250px] overflow-hidden rounded">
                     <img
                         src="https://i.ibb.co/YPNL48R/ad-300x250.jpg"
@@ -63,7 +63,7 @@ const RightSlider = () => {
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div>
+            </div> */}
 
 
             {/* Latest News */}
@@ -84,7 +84,7 @@ const RightSlider = () => {
             </div>
 
             {/* Ads */}
-            <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
+            {/* <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
                 <div className="w-full h-[250px] overflow-hidden rounded">
                     <img
                         src="https://i.ibb.co/YPNL48R/ad-300x250.jpg"
@@ -92,7 +92,7 @@ const RightSlider = () => {
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div>
+            </div> */}
 
             {/* Facebook page */}
             <div className="bg-[#F8F8F8] flex justify-center items-center my-10">
@@ -108,7 +108,7 @@ const RightSlider = () => {
             </div>
 
             {/* Ads */}
-            <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
+            {/* <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
                 <div className="w-full h-[250px] overflow-hidden rounded">
                     <img
                         src="https://i.ibb.co/YPNL48R/ad-300x250.jpg"
@@ -116,7 +116,7 @@ const RightSlider = () => {
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div>
+            </div> */}
 
             {/* Chakrir News */}
             <div className="bg-[#F8F8F8] my-6 p-4">
@@ -134,7 +134,7 @@ const RightSlider = () => {
             </div>
 
             {/* Ads */}
-            <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
+            {/* <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
                 <div className="w-full h-[250px] overflow-hidden rounded">
                     <img
                         src="https://i.ibb.co/YPNL48R/ad-300x250.jpg"
@@ -142,7 +142,7 @@ const RightSlider = () => {
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div>
+            </div> */}
 
             {/* Chakrir News */}
             <div className="bg-[#F8F8F8] my-6 p-4">

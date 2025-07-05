@@ -7,7 +7,7 @@ const NewsCardHome = ({ item }) => {
     return (
         <div className="">
             <div className="relative overflow-hidden rounded-md shadow group">
-                <Link to={''}>
+                <Link to={`/details/${item._id}`}>
                     <div className=" h-[286px]">
                         <img
                             src={item.cover}
@@ -18,7 +18,7 @@ const NewsCardHome = ({ item }) => {
                 </Link>
 
                 <Link
-                    to={''}
+                    to={`/${item.category}`}
                     className="bg-[#1D1D1D] text-[#fff] px-3 py-1 text-xs font-medium absolute top-2 left-2 rounded"
                 >
                     {item.categoryBn}
@@ -29,8 +29,8 @@ const NewsCardHome = ({ item }) => {
                         <h2>Nishi Barta</h2>
                         <p>{moment(item.date).locale('bn').format('D MMMM, YYYY')}</p>
                     </div>
-                    <div className="text-white font-bold p-2 text-sm leading-tight">
-                        <Link to={''}>{item.headline}</Link>
+                    <div className="text-white font-bold p-2 text-sm leading-tight hover:text-[#fa7676]">
+                        <Link to={`/details/${item._id}`}>{item.headline}</Link>
                     </div>
                 </div>
             </div>

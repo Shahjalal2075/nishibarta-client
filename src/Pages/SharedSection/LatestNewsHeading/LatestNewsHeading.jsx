@@ -8,7 +8,7 @@ const LatestNewsHeading = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        fetch(`${api}/news`)
+        fetch(`https://nishibarta-server.vercel.app/news`)
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(item =>
@@ -22,7 +22,7 @@ const LatestNewsHeading = () => {
                 const top11Data = sorted.slice(0, 11);
                 setNews(top11Data);
             });
-    }, [api]);
+    }, []);
 
 
     return (
@@ -33,7 +33,7 @@ const LatestNewsHeading = () => {
                     {
                         news && news.length > 0 ?
                             news.map((j) => (
-                                <Link className="mr-10" key={j._id}>{j.headline}</Link>
+                                <Link to={`/details/${j._id}`} className="mr-10 hover:text-[#da0000]" key={j._id}>{j.headline}</Link>
                             ))
                             :
                             <Link className="mr-10">No News.</Link>

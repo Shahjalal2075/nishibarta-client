@@ -7,7 +7,7 @@ const CategoryHome = () => {
     const { api } = useContext(AuthContext);
     const [sectionList, setSectionList] = useState([]);
     useEffect(() => {
-        fetch(`${api}/menu`)
+        fetch(`https://nishibarta-server.vercel.app/menu`)
             .then(res => res.json())
             .then(data => {
                 const sortedData = data.sort((a, b) => a.sl - b.sl);

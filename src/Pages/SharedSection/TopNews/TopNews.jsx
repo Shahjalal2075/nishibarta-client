@@ -8,7 +8,7 @@ const TopNews = () => {
     const [topHeadNews, setTopHeadNews] = useState([]);
     const [topNews, setTopNews] = useState([]);
     useEffect(() => {
-        fetch(`${api}/news`)
+        fetch(`https://nishibarta-server.vercel.app/news`)
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(item =>
