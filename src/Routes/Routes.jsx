@@ -18,11 +18,13 @@ const Routes = createBrowserRouter([
       },
       {
         path: "/:name",
-        element: <PrivateRoute><CategoryNews></CategoryNews></PrivateRoute>
+        element: <PrivateRoute><CategoryNews></CategoryNews></PrivateRoute>,
+        loader: ({ params }) => fetch(`https://nishibarta-server.vercel.app/menu/${params.name}`)
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute><Details></Details></PrivateRoute>
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
+        loader: ({ params }) => fetch(`https://nishibarta-server.vercel.app/news-details/${params.id}`)
       },
     ]
   },

@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TopNewsCard from "../TopNewsCard/TopNewsCard";
-import { AuthContext } from "../../../Providers/AuthProvider";
 
 const TopNews = () => {
 
-    const { api } = useContext(AuthContext);
     const [topHeadNews, setTopHeadNews] = useState([]);
     const [topNews, setTopNews] = useState([]);
     useEffect(() => {
@@ -26,7 +24,7 @@ const TopNews = () => {
                 setTopHeadNews(top1Data);
                 setTopNews(top4Data);
             });
-    }, [])
+    }, []);
 
     return (
         <div className="grid grid-cols-4 gap-3">

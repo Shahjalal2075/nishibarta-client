@@ -6,7 +6,6 @@ import RightSlider from '../SharedSection/RightSlider/RightSlider';
 
 const Home = () => {
 
-    const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
 
     if (loading) {
@@ -28,7 +27,7 @@ const Home = () => {
                     <CategoryHome></CategoryHome>
                 </div>
                 
-                <div className="">
+                <div className="my-6">
                     <RightSlider></RightSlider>
                 </div>
             </div>

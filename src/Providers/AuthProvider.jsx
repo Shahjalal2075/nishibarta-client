@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
 
     const internalData = {
         headerAds: "https://i.ibb.co/LY8TWzz/ad-728x90.jpg",
-        logoDark:"https://i.ibb.co/jzHTFgY/logodark.png",
+        logoDark: "https://i.ibb.co/jzHTFgY/logodark.png",
         temperature: 25,
         facebook: "https://www.facebook.com/nishibarta",
         twitter: "https://facebook.com",
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const authInfo = { user, loading,internalData }
+    const authInfo = { user, loading, internalData }
 
     return (
         <AuthContext.Provider value={authInfo}>

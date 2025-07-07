@@ -5,7 +5,6 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 
 const RightSlider = () => {
 
-    const { api } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [latestNews, setLatestNews] = useState([]);
     const [ojanaNews, setOjanaNews] = useState([]);
@@ -38,7 +37,7 @@ const RightSlider = () => {
             } catch (error) {
                 console.error("Error fetching news:", error);
             } finally {
-                setLoading(false); // ✅ Ensure loading is turned off
+                setLoading(false);
             }
         };
 
@@ -67,7 +66,7 @@ const RightSlider = () => {
 
 
             {/* Latest News */}
-            <div className="bg-[#F8F8F8] my-6 p-4">
+            <div className="bg-[#F8F8F8] p-4 rounded-lg">
                 <div className="bg-[#DA0000] text-[#fff] font-medium text-lg py-1 ">
                     <h2 className="text-center">সর্বশেষ</h2>
                 </div>
@@ -95,7 +94,7 @@ const RightSlider = () => {
             </div> */}
 
             {/* Facebook page */}
-            <div className="bg-[#F8F8F8] flex justify-center items-center my-10">
+            <div className="bg-[#F8F8F8] flex justify-center items-center my-10 rounded-lg">
                 <div className="p-4">
                     <iframe
                         src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnishibarta%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
@@ -119,7 +118,7 @@ const RightSlider = () => {
             </div> */}
 
             {/* Chakrir News */}
-            <div className="bg-[#F8F8F8] my-6 p-4">
+            <div className="bg-[#F8F8F8] my-6 p-4 rounded-lg">
                 <div className="bg-[#DA0000] text-[#fff] font-medium text-lg py-1 ">
                     <h2 className="text-center">চাকরির সর্বশেষ খবর</h2>
                 </div>
@@ -145,7 +144,7 @@ const RightSlider = () => {
             </div> */}
 
             {/* Chakrir News */}
-            <div className="bg-[#F8F8F8] my-6 p-4">
+            <div className="bg-[#F8F8F8] mt-6 p-4 rounded-lg">
                 <div className="bg-[#DA0000] text-[#fff] font-medium text-lg py-1 ">
                     <h2 className="text-center">অজানা কিছু কথা</h2>
                 </div>
