@@ -35,8 +35,8 @@ const CategoryNews = () => {
     }
 
     return (
-        <div className="grid grid-cols-3 mt-8">
-            <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mt-8 px-3">
+            <div className="lg:col-span-2">
                 <div className="pb-6">
                     <div className="flex justify-between items-center text-[#D40000] text-3xl font-bold ">
                         <h2>{section.name} সংবাদ</h2>
@@ -45,15 +45,15 @@ const CategoryNews = () => {
                 <div className="grid grid-cols-1 gap-4">
                     {
                         news.map((data) => (
-                            <Link key={data._id} to={`/details/${data._id}`} className="p-3 grid grid-cols-3 gap-3 bg-[#fff] rounded-lg hover:bg-[#fff8f8]">
+                            <Link key={data._id} to={`/details/${data._id}`} className="p-3 grid grid-cols-1 lg:grid-cols-3 lg:gap-3 bg-[#fff] rounded-lg hover:bg-[#fff8f8]">
                                 <div className="">
                                     <div>
                                         <div className="w-full ">
-                                            <img className="w-full h-full object-cover" src={data.cover} alt="" />
+                                            <img className="w-full h-full object-cover rounded-lg" src={data.cover} alt="" />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-col justify-center col-span-2">
+                                <div className="flex flex-col justify-center col-span-2 mt-5 lg:mt-0">
                                     <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
                                         <p>{moment(data.date).locale('bn').format('D MMMM, YYYY')}</p>
                                     </div>
@@ -69,7 +69,7 @@ const CategoryNews = () => {
                     }
                 </div>
             </div>
-            <div className="">
+            <div className="my-6 lg:my-0">
                 <RightSlider></RightSlider>
             </div>
         </div>

@@ -17,17 +17,17 @@ const Home = () => {
     }
 
     return (
-        <div className="" >
+        <div className="px-3" >
             <div>
                 <TopNews></TopNews>
             </div>
 
-            <div className="grid grid-cols-3 mt-8">
-                <div className="col-span-2">
+            <div className="grid grid-cols-1 lg:grid-cols-3 mt-8">
+                <div className="lg:col-span-2">
                     <CategoryHome></CategoryHome>
                 </div>
                 
-                <div className="my-6">
+                <div className="lg:my-6">
                     <RightSlider></RightSlider>
                 </div>
             </div>

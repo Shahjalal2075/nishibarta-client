@@ -52,7 +52,7 @@ const RightSlider = () => {
         );
     }
     return (
-        <div className="ml-6">
+        <div className="lg:ml-6">
             {/* Ads */}
             {/* <div className="bg-[#F8F8F8] flex justify-center items-center p-2">
                 <div className="w-full h-[250px] overflow-hidden rounded">

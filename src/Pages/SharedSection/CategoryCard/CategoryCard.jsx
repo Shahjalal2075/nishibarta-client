@@ -26,7 +26,7 @@ const CategoryCard = ({ section }) => {
     }, [section.link])
 
     return (
-        <div className={(section.name === "") && "col-span-2"}>
+        <div className={(section.name === "") && "md:col-span-2"}>
             {
                 (section.name !== "")
                     ?

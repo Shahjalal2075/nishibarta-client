@@ -45,8 +45,8 @@ const Details = () => {
 
 
     return (
-        <div className="grid grid-cols-3 mt-8">
-            <div className="col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mt-8 px-3">
+            <div className="lg:col-span-2">
                 <div className="">
                     <div className="pb-5">
                         <h2 className='text-[#111] font-extrabold p-2 text-3xl leading-14'>{data.headline}</h2>
@@ -82,7 +82,7 @@ const Details = () => {
                 </div>
                 <div className="mt-20">
                     <h2 className='text-lg font-bold text-[#111] my-4'>জনপ্রিয়</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
                     {
                         news.map((item) => (
                             <NewsCardHome
@@ -94,7 +94,7 @@ const Details = () => {
                 </div>
                 </div>
             </div>
-            <div className="">
+            <div className="mt-5 lg:mt-0">
                 <RightSlider></RightSlider>
             </div>
             <ToastContainer />

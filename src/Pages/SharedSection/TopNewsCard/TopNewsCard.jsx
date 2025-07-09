@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const TopNewsCard = ({ news }) => {
     return (
-        <div className={news.isTopHead === true ? "col-span-2 row-span-2" : ""}>
+        <div className={news.isTopHead === true ? "lg:col-span-2 lg:row-span-2" : ""}>
             <div className="relative overflow-hidden rounded-lg shadow-md group w-full aspect-[1250/830]">
                 <Link to={`/details/${news._id}`}>
                     <img
