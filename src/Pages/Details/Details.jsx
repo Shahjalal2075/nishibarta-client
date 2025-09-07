@@ -12,7 +12,7 @@ import NewsCardHome from '../SharedSection/NewsCardHome/NewsCardHome';
 const Details = () => {
 
     const data = useLoaderData();
-    const shareUrl = `https://preview-server-six.vercel.app/news/${data._id}`;
+    const shareUrl = `https://preview.nishibarta.com/news/${data._id}`;
 
     const [news, setNews] = useState([]);
 
