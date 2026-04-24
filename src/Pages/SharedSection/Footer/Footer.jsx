@@ -8,7 +8,7 @@ const Footer = () => {
                 <p className="font-bold text-center">
                     সকল ধরনের সংবাদসহ যাবতীয় খবর পেতে চোখ রাখুন নিশি বার্তাতে
                 </p>
-                <p className="text-center">© ২০২৫ - সমস্ত অধিকার নিশি বার্তা দ্বারা সংরক্ষিত</p>
+                <p className="text-center">© ২০২৬ - সমস্ত অধিকার নিশি বার্তা দ্বারা সংরক্ষিত</p>
                 <div className="grid grid-flow-col gap-4">
                     <a target="_blank" href="https://www.facebook.com/nishibarta"><FaFacebookF /></a>
                     <a target="_blank" href="https://www.youtube.com/@NishiBarta"><FaYoutube /></a>

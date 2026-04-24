@@ -59,12 +59,12 @@ const CategoryCard = ({ section }) => {
                 (section.name !== "")
                     ?
                     <div className="">
-                        <hr className="border border-[#D40000] w-full my-3" />
+                         <hr className="border border-[#D40000] w-full my-3" />
                         <div className="flex justify-between items-center text-[#D40000] text-lg font-bold ">
                             <Link to={section.link}>{section.name}</Link>
                             <Link to={section.link}><FaLongArrowAltRight /></Link>
                         </div>
-                        <div className="grid grid-cols-1 gap-4 my-3">
+                        <div className="grid grid-cols-2 md:grid-cols-1 gap-4 my-3">
 
                             {
                                 news.map(item =>
@@ -74,7 +74,7 @@ const CategoryCard = ({ section }) => {
                                     ></NewsCardHome>
                                 )
                             }
-                            <hr className="border border-[#D40000] w-full my-3" />
+                           {/*   <hr className="border border-[#D40000] w-full my-3" /> */} 
                         </div>
                     </div>
                     :
