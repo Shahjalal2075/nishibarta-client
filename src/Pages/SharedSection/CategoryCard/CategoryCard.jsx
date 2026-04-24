@@ -1,15 +1,30 @@
 import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NewsCardHome from "../NewsCardHome/NewsCardHome";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const CategoryCard = ({ section }) => {
 
-    const { api } = useContext(AuthContext);
     const [news, setNews] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
+        if (!section?.link) return;
+
+        const cacheKey = `news_${section.link}`;
+        const cachedNews = localStorage.getItem(cacheKey);
+
+        // 👉 1. Show cached data instantly (if exists)
+        if (cachedNews) {
+            setNews(JSON.parse(cachedNews));
+            setLoading(false);
+        } else {
+            setLoading(true);
+        }
+
+        // 👉 2. Fetch fresh data
         fetch(`https://nishibarta-server.vercel.app/news/${section.link}`)
             .then(res => res.json())
             .then(data => {
@@ -20,10 +35,23 @@ const CategoryCard = ({ section }) => {
                 const sorted = filtered.sort((a, b) =>
                     new Date(b.date) - new Date(a.date)
                 );
-                const top3Data = sorted.slice(0, 2);
-                setNews(top3Data);
+
+                const topData = sorted.slice(0, 2);
+
+                // 👉 3. Update state
+                setNews(topData);
+
+                // 👉 4. Save cache (per section)
+                localStorage.setItem(cacheKey, JSON.stringify(topData));
+
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
             });
-    }, [section.link])
+        
+    }, [section.link]);
 
     return (
         <div className={(section.name === "") && "md:col-span-2"}>

@@ -9,8 +9,27 @@ const RightSlider = () => {
     const [latestNews, setLatestNews] = useState([]);
     const [ojanaNews, setOjanaNews] = useState([]);
     const [chakriNews, setChakriNews] = useState([]);
-    
+
     useEffect(() => {
+        const cacheKeys = {
+            latest: "latestNews",
+            ojana: "ojanaNews",
+            chakri: "chakriNews"
+        };
+
+        // 👉 1. Load from cache first
+        const cachedLatest = localStorage.getItem(cacheKeys.latest);
+        const cachedOjana = localStorage.getItem(cacheKeys.ojana);
+        const cachedChakri = localStorage.getItem(cacheKeys.chakri);
+
+        if (cachedLatest && cachedOjana && cachedChakri) {
+            setLatestNews(JSON.parse(cachedLatest));
+            setOjanaNews(JSON.parse(cachedOjana));
+            setChakriNews(JSON.parse(cachedChakri));
+            setLoading(false); // instant UI
+        }
+
+        // 👉 2. Fetch fresh data in parallel
         const fetchData = async () => {
             try {
                 const [newsRes, ojanaRes, chakriRes] = await Promise.all([
@@ -31,9 +50,20 @@ const RightSlider = () => {
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .slice(0, limit);
 
-                setLatestNews(filterAndSort(news, 8));
-                setOjanaNews(filterAndSort(ojana, 6));
-                setChakriNews(filterAndSort(chakri, 6));
+                const latest = filterAndSort(news, 8);
+                const ojanaData = filterAndSort(ojana, 6);
+                const chakriData = filterAndSort(chakri, 6);
+
+                // 👉 3. Update state
+                setLatestNews(latest);
+                setOjanaNews(ojanaData);
+                setChakriNews(chakriData);
+
+                // 👉 4. Save cache separately
+                localStorage.setItem(cacheKeys.latest, JSON.stringify(latest));
+                localStorage.setItem(cacheKeys.ojana, JSON.stringify(ojanaData));
+                localStorage.setItem(cacheKeys.chakri, JSON.stringify(chakriData));
+
             } catch (error) {
                 console.error("Error fetching news:", error);
             } finally {

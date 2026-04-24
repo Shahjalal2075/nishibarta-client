@@ -4,6 +4,7 @@ import TopNewsCard from "../TopNewsCard/TopNewsCard";
 const TopNews = () => {
     const [topHeadNews, setTopHeadNews] = useState([]);
     const [topNews, setTopNews] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [visibleCount, setVisibleCount] = useState(4); // Default for desktop
 
     useEffect(() => {
@@ -23,6 +24,19 @@ const TopNews = () => {
     }, []);
 
     useEffect(() => {
+        const cachedData = localStorage.getItem("newsData");
+
+        // 👉 1. Check localStorage first
+        if (cachedData) {
+            const parsed = JSON.parse(cachedData);
+
+            setTopHeadNews(parsed.topHeadNews);
+            setTopNews(parsed.topNews);
+
+            setLoading(false); // instant UI show
+        }
+
+        // 👉 2. Always fetch fresh data
         fetch(`https://nishibarta-server.vercel.app/news`)
             .then(res => res.json())
             .then(data => {
@@ -37,10 +51,34 @@ const TopNews = () => {
                 const topHeadData = sorted.filter(item => item.isTopHead === true);
                 const topNewsData = sorted.filter(item => item.isTopNews === true);
 
-                setTopHeadNews(topHeadData.slice(0, 1));
-                setTopNews(topNewsData); // Don't slice here, we'll slice in render
+                const finalData = {
+                    topHeadNews: topHeadData.slice(0, 1),
+                    topNews: topNewsData
+                };
+
+                // 👉 3. Update state
+                setTopHeadNews(finalData.topHeadNews);
+                setTopNews(finalData.topNews);
+
+                // 👉 4. Save to localStorage
+                localStorage.setItem("newsData", JSON.stringify(finalData));
+
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
             });
+
     }, []);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-[300px]">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#4101d8]"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
