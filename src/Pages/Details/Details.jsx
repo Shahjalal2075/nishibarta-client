@@ -49,7 +49,7 @@ const Details = () => {
             <div className="lg:col-span-2">
                 <div className="">
                     <div className="pb-5">
-                        <h2 className='text-[#111] font-extrabold p-2 text-3xl leading-14'>{data.headline}</h2>
+                        <h1 className='text-[#111] font-extrabold p-2 text-3xl leading-14'>{data.headline}</h1>
                         <div className="flex gap-4 text-xs text-[#111] font-bold px-2 items-center">
                             <p>{data.journalist}</p>
                             <p>{BanglaDate(data.date)}</p>

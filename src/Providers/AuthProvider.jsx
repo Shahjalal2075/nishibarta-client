@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
     const internalData = {
         headerAds: "https://i.ibb.co/LY8TWzz/ad-728x90.jpg",
         logoDark: "https://i.ibb.co/jzHTFgY/logodark.png",
-        temperature: 30,
+        temperature: 29,
         facebook: "https://www.facebook.com/nishibarta",
         twitter: "https://facebook.com",
         youtube: "https://facebook.com",

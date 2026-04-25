@@ -46,7 +46,7 @@ function toBanglaDate(iso) {
 
                 <div className="absolute bottom-0 bg-[#11111190] w-full py-2">
                     <div className="flex gap-4 sm:text-xs text-[8px] text-white font-bold sm:px-2 px-1 items-center">
-                        <h2>নিশি বার্তা</h2>
+                        <h1>নিশি বার্তা</h1>
                         <p>{toBanglaDate(item.date)}</p>
                     </div>
                     <div className="text-white font-bold p-1 sm:p-2 sm:text-sm text-[10px]  hover:text-[#fa7676]">
