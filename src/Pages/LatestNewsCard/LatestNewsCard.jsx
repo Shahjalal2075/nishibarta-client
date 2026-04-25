@@ -8,7 +8,7 @@ const LatestNewsCard = ({ news }) => {
                 <div className="">
                     <Link to={`/details/${news._id}`}>
                         <div className="w-full h-[86px]">
-                            <img className="w-full h-full object-cover" src={news.cover} alt="" />
+                            <img className="w-full h-full object-cover" src={news.cover} alt={news.journalist} />
                         </div>
                     </Link>
                 </div>

@@ -49,7 +49,7 @@ const CategoryNews = () => {
                                 <div className="">
                                     <div>
                                         <div className="w-full ">
-                                            <img className="w-full h-full object-cover rounded-lg" src={data.cover} alt="" />
+                                            <img className="w-full h-full object-cover rounded-lg" src={data.cover} alt="data.headline" />
                                         </div>
                                     </div>
                                 </div>
